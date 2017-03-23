@@ -16,7 +16,6 @@ public final class GsalesPage {
 	public static void dailySaleGoodsPage() {
 		System.out.println("\t正在执行列出当日售出商品列表操作\n");
 		ArrayList<Gsales> GsalesList = new GsalesDao().dailyGsales();// 当日售出商品数组集
-
 		if (GsalesList.size() <= 0) {
 			System.err.println("\t！！今日无商品售出！！");
 			MainPage.commodityManagementPage();

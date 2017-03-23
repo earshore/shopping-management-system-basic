@@ -29,10 +29,11 @@ public final class GsalesDao {
 	public ArrayList<Gsales> dailyGsales() {
 		ArrayList<Gsales> GsalesList = new ArrayList<Gsales>();
 		conn = DbConn.getconn();
-
 		// 售卖时间=当前时间 trunc(sdate) =trunc(sysdate) 单位：天
 		// sql语句解释见files/sql/java_sql.sql
-		String sql = "select gname,gprice,gnum, allSum from goods, (select gid as salesid,sum(snum) as allSum from gsales where trunc(sdate) =trunc(sysdate) group by gid) where gid = salesid";
+//		String sql = "select gname,gprice,gnum, allSum from goods, (select gid as salesid,sum(snum) as allSum from gsales where trunc(sdate) =trunc(current_timestamp) group by gid)  where t.gid = salesid";
+		String sql = "select gname,gprice,gnum, allSum from goods, (select gid as salesid,sum(snum) as allSum from gsales where DATE_FORMAT(sdate,'%Y-%m-%d') =DATE_FORMAT(current_timestamp,'%Y-%m-%d') group by gid)  t where gid = salesid";
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -41,7 +42,6 @@ public final class GsalesDao {
 				double gPrice = rs.getDouble(2);
 				int gNum = rs.getInt(3);
 				int allSnum = rs.getInt("allSum");
-
 				Gsales Gsales = new Gsales(gName, gPrice, gNum, allSnum);
 				GsalesList.add(Gsales);
 			}
