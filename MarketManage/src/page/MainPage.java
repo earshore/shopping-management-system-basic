@@ -40,14 +40,14 @@ public final class MainPage extends ScannerChoice {
 		System.out.println("\n请输入选项,或者按0退出.");
 		do {
 			String choice = ScannerInfoString();
-			String regex = "[0-3]";// 正则表达式
-			if (choice.matches(regex)) {
+			String regex = "[0-3]"; // 正则表达式，[]表示匹配中间的内容，0-3表示仅匹配0-3内的数字
+			if (choice.matches(regex)) { // match函数匹配
 				int info = Integer.parseInt(choice);
 				switch (info) {
 				case 0:
 					System.out.println("------------------");
 					System.out.println("您已经退出系统!");
-					System.exit(1);// 退出程序，返回值随便设置
+					System.exit(1); // 退出程序，返回值随便设置
 					break;
 				case 1:
 					MaintenancePage();
@@ -83,13 +83,13 @@ public final class MainPage extends ScannerChoice {
 
 		System.out.println("\n请输入选项,或者按 0 返回上一级菜单.");
 		do {
-			String choice = ScannerInfoString();
-			String regex = "[0-5]";
+			String choice = ScannerInfoString(); // 输入选择
+			String regex = "[0-5]"; // []表示匹配中间的内容，0-5表示仅匹配0-5内的数字
 			if (choice.matches(regex)) {
 				int info = Integer.parseInt(choice);
 				switch (info) {
 				case 0:
-					mainPage();
+					MainPage.mainPage();
 					break;
 				case 1:
 					GoodsPage.addGoodsPage();
@@ -132,10 +132,10 @@ public final class MainPage extends ScannerChoice {
 				int info = Integer.parseInt(choice);
 				switch (info) {
 				case 0:
-					mainPage();
+					MainPage.mainPage();
 					break;
 				case 1:
-					int loginTimes = 3;// 3次登陆机会
+					int loginTimes = 5;// 5次登陆机会
 
 					while (loginTimes != 0) {
 						loginTimes--;
@@ -200,10 +200,10 @@ public final class MainPage extends ScannerChoice {
 				int info = Integer.parseInt(choice);
 				switch (info) {
 				case 0:
-					mainPage();
+					MainPage.mainPage();
 					break;
 				case 1:
-					salesManManagementPage();
+					MainPage.salesManManagementPage();
 					break;
 				case 2:
 					GsalesPage.dailySaleGoodsPage();
@@ -226,7 +226,7 @@ public final class MainPage extends ScannerChoice {
 			System.out.println("按 S 开始购物结算.按 0 返回账户登录界面");
 			String choNext = ScannerInfoString();
 			if ("0".equals(choNext)) {
-				checkstandLogPage();
+				MainPage.checkstandLogPage();
 
 			} else if ("s".equals(choNext) || "S".equals(choNext)) {
 				System.out.println("\n--请输入商品关键字--");
@@ -281,8 +281,7 @@ public final class MainPage extends ScannerChoice {
 									String choShopping = ScannerInfoString();
 									if ("y".equals(choShopping)
 											|| "Y".equals(choShopping)) {
-										System.out.println("\n总价：" + allPrice
-												+ " $");
+										System.out.println("\n总价：" + allPrice + " $");
 										System.out.println("\n实际缴费金额");
 
 										do {
@@ -290,10 +289,8 @@ public final class MainPage extends ScannerChoice {
 											double balance = Arith.sub(amount,
 													allPrice); // 用户交钱与购买物品总价间的差额
 											if (balance < 0) {
-												System.err
-														.println("\t！！缴纳金额不足！！");
-												System.out
-														.println("\n请重新输入缴纳金额($)");
+												System.err.println("\t！！缴纳金额不足！！");
+												System.out.println("\n请重新输入缴纳金额($)");
 											} else {
 
 												/*
@@ -304,39 +301,26 @@ public final class MainPage extends ScannerChoice {
 												 */
 
 												// 对sales表操作
-												Gsales gSales = new Gsales(
-														goods.getGid(),
-														salesManSid,
-														choicegoodsNum);
-												boolean insert = new GsalesDao()
-														.shoppingSettlement(gSales);
+												Gsales gSales = new Gsales(goods.getGid(), salesManSid, choicegoodsNum);
+												boolean insert = new GsalesDao().shoppingSettlement(gSales);
 
 												// 对goods表操作
-												int goodsNewNum = gNum
-														- choicegoodsNum; // 现在goods表中该商品数量
-												Goods newGoods = new Goods(
-														goods.getGid(),
-														goodsNewNum);
-												boolean update = new GoodsDao()
-														.updateGoods(3,
-																newGoods);
+												int goodsNewNum = gNum - choicegoodsNum; // 现在goods表中该商品数量
+												Goods newGoods = new Goods( goods.getGid(), goodsNewNum);
+												boolean update = new GoodsDao().updateGoods(3, newGoods);
 
 												if (update && insert) {
-													System.out.println("找零："
-															+ balance);
-													System.out
-															.println("\n谢谢光临，欢迎下次惠顾");
+													System.out.println("找零：" + balance);
+													System.out.println("\n谢谢光临，欢迎下次惠顾");
 												} else {
-													System.err
-															.println("！支付失败！"); // 出现这个错误一定是数据库操作有问题！
+													System.err.println("！支付失败！"); // 出现这个错误一定是数据库操作有问题！
 												}
 												shoppingSettlementPage(salesManSid);// 最后跳转到到购物结算页面
 												// 结束购物结算操作数据库！！！！！！-----------------------------------
 											}
 										} while (true);
 
-									} else if ("N".equals(choShopping)
-											|| "n".equals(choShopping)) {
+									} else if ("N".equals(choShopping) || "n".equals(choShopping)) {
 										shoppingSettlementPage(salesManSid);
 									}
 									System.err.println("\t！！请确认购物意向！！");
@@ -373,7 +357,7 @@ public final class MainPage extends ScannerChoice {
 				int info = Integer.parseInt(choice);
 				switch (info) {
 				case 0:
-					commodityManagementPage();
+					MainPage.commodityManagementPage();
 					break;
 				case 1:
 					SalesManPage.addSalesManPage();
