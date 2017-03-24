@@ -22,13 +22,13 @@ public final class GoodsPage extends ScannerChoice {
 
 		System.out.println("\t正在执行添加商品操作\n");
 
-		System.out.println("\n請輸入添加商品-名称");
+		System.out.println("\n请输入添加商品-名称");
 		String goodsName = ScannerInfoString();
 
-		System.out.println("\n請輸入添加商品-价格");
+		System.out.println("\n请输入添加商品-价格");
 		double goodsPrice = ScannerInfo();
 
-		System.out.println("\n請輸入添加商品-数量");
+		System.out.println("\n请输入添加商品-数量");
 		int goodsNumber = ScannerNum();
 
 		Goods goods = new Goods(goodsName, goodsPrice, goodsNumber);
