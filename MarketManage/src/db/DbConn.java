@@ -15,7 +15,7 @@ public final class DbConn {
 
 		String user = "root";
 		String passwd = "12345";
-		String url = "jdbc:mysql://localhost:3306/marketdb?useUnicode=true&characterEncoding=utf-8&useSSL=false";// orcl为oracle数据库实例名字
+		String url = "jdbc:mysql://localhost:3306/marketdb?useUnicode=true&characterEncoding=utf-8&useSSL=false";// marketdb为mysql数据库实例名字
 
 		// 已加载完驱动
 		try {
