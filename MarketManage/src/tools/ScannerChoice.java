@@ -1,7 +1,6 @@
 package tools;
 
 import java.util.Scanner;
-
 import page.GoodsPage;
 import page.MainPage;
 import page.SalesManPage;
