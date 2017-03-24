@@ -46,8 +46,7 @@ public final class SalesManPage extends ScannerChoice {
 		String sName = ScannerInfoString();
 
 		// 调用精确查找售货员函数
-		ArrayList<SalesMan> salesManList = new QueryPrint()
-				.querySalesMan(sName);
+		ArrayList<SalesMan> salesManList = new QueryPrint().querySalesMan(sName);
 		if (salesManList.size() <= 0) {
 			System.err.println("\t！！查无此人！！");
 			choiceSalesManNext("updateSalesMan");
@@ -57,8 +56,9 @@ public final class SalesManPage extends ScannerChoice {
 			System.out.println("\t售货员编号\t\t售货员姓名\t\t售货员密码");
 
 			SalesMan salesMan = salesManList.get(0); // 上面的精确查找中，只能返回一组数值。无需遍历！
-			System.out.println("\t" + salesMan.getSId() + "\t\t\t"
-					+ salesMan.getSName() + "\t\t\t" + salesMan.getSPassWord());
+			System.out.println("\t" + salesMan.getSId() + "\t\t\t"+ salesMan.getSName() + "\t\t\t" +"*****");				//密码显示密文
+					
+			//+ salesMan.getSPassWord());
 			System.out.println();
 
 			// 选择更改售货员内容
@@ -94,11 +94,8 @@ public final class SalesManPage extends ScannerChoice {
 						System.out.println("更改售货员-新密码");
 						String sNewPasswd = ScannerInfoString();
 
-						SalesMan salesManPasswd = new SalesMan(
-								salesMan.getSId(), null, sNewPasswd);
-						boolean boolsPasswd = new SalesManDao().updateSalesMan(
-								2, salesManPasswd);
-
+						SalesMan salesManPasswd = new SalesMan(salesMan.getSId(), null, sNewPasswd);
+						boolean boolsPasswd = new SalesManDao().updateSalesMan(2, salesManPasswd);
 						if (boolsPasswd) {
 							System.out.println("\n\t！！成功更新售货员密码至数据库！！\n");
 						} else {
@@ -138,9 +135,8 @@ public final class SalesManPage extends ScannerChoice {
 
 			for (int i = 0, length = salesManList.size(); i < length; i++) {
 				SalesMan salesMan = salesManList.get(i);
-				System.out.println("\t" + salesMan.getSId() + "\t\t\t"
-						+ salesMan.getSName() + "\t\t\t"
-						+ salesMan.getSPassWord());
+				System.out.println("\t" + salesMan.getSId() + "\t\t\t" + salesMan.getSName() + "\t\t\t" +"*****");
+				//+ salesMan.getSPassWord());
 				System.out.println();
 			}
 			// 确认是否真的删除！
@@ -185,9 +181,8 @@ public final class SalesManPage extends ScannerChoice {
 
 			for (int i = 0, length = salesManList.size(); i < length; i++) {
 				SalesMan salesMan = salesManList.get(i);
-				System.out.println("\t" + salesMan.getSId() + "\t\t\t"
-						+ salesMan.getSName() + "\t\t\t"
-						+ salesMan.getSPassWord());
+				System.out.println("\t" + salesMan.getSId() + "\t\t\t" + salesMan.getSName() + "\t\t\t"+"*****");
+					 //+ salesMan.getSPassWord());
 				System.out.println();
 			}
 		}
@@ -208,9 +203,8 @@ public final class SalesManPage extends ScannerChoice {
 
 			for (int i = 0, length = salesManList.size(); i < length; i++) {
 				SalesMan salesMan = salesManList.get(i);
-				System.out.println("\t" + salesMan.getSId() + "\t\t\t"
-						+ salesMan.getSName() + "\t\t\t"
-						+ salesMan.getSPassWord());
+				System.out.println("\t" + salesMan.getSId() + "\t\t\t"+ salesMan.getSName() + "\t\t\t"+"*****");
+						//+ salesMan.getSPassWord());
 				System.out.println();
 			}
 			do {
